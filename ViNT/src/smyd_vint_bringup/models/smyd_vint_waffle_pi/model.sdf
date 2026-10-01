@@ -1,12 +1,9 @@
-<?xml version="1.0" ?>
-<!-- Adapted from ROBOTIS turtlebot3_gazebo/models/turtlebot3_waffle_pi/model.sdf
-     (Apache-2.0; see LICENSE-APACHE-2.0 in this directory).
-     Changes: model name and camera resolution/update rate for software rendering. -->
+<?xml version='1.0' encoding='utf-8'?>
 <sdf version="1.5">
   <model name="smyd_vint_waffle_pi">  
   <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
 
-    <link name="base_footprint"/>
+    <link name="base_footprint" />
 
     <link name="base_link">
 
@@ -36,7 +33,7 @@
         <pose>-0.064 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://turtlebot3_common/meshes/bases/waffle_pi_base.stl</uri>
+            <uri>model://turtlebot3_description/meshes/bases/waffle_pi_base.stl</uri>
             <scale>0.001 0.001 0.001</scale>
           </mesh>
         </geometry>
@@ -93,13 +90,7 @@
             </z>
           </linear_acceleration>
         </imu>
-        <plugin name="turtlebot3_imu" filename="libgazebo_ros_imu_sensor.so">
-          <ros>
-            <!-- <namespace>/tb3</namespace> -->
-            <remapping>~/out:=imu</remapping>
-          </ros>
-        </plugin>
-      </sensor>
+        </sensor>
     </link>
 
     <link name="base_scan">    
@@ -130,7 +121,7 @@
         <pose>-0.064 0 0.121 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://turtlebot3_common/meshes/sensors/lds.stl</uri>
+            <uri>model://turtlebot3_description/meshes/sensors/lds.stl</uri>
             <scale>0.001 0.001 0.001</scale>
           </mesh>
         </geometry>
@@ -165,15 +156,7 @@
             <stddev>0.01</stddev>
           </noise>
         </ray>
-        <plugin name="turtlebot3_laserscan" filename="libgazebo_ros_ray_sensor.so">
-          <ros>
-            <!-- <namespace>/tb3</namespace> -->
-            <remapping>~/out:=scan</remapping>
-          </ros>
-          <output_type>sensor_msgs/LaserScan</output_type>
-          <frame_name>base_scan</frame_name>
-        </plugin>
-      </sensor>
+        </sensor>
     </link>
 
     <link name="wheel_left_link">
@@ -200,7 +183,7 @@
           </cylinder>
         </geometry>
         <surface>
-          <!-- This friction pamareter don't contain reliable data!! -->
+          
           <friction>
             <ode>
               <mu>100000</mu>
@@ -227,7 +210,7 @@
         <pose>0.0 0.144 0.023 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://turtlebot3_common/meshes/wheels/right_tire.stl</uri>
+            <uri>model://turtlebot3_description/meshes/wheels/right_tire.stl</uri>
             <scale>0.001 0.001 0.001</scale>
           </mesh>
         </geometry>
@@ -262,7 +245,7 @@
           </cylinder>
         </geometry>
         <surface>
-          <!-- This friction pamareter don't contain reliable data!! -->
+          
           <friction>
             <ode>
               <mu>100000</mu>
@@ -289,7 +272,7 @@
         <pose>0.0 -0.144 0.023 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://turtlebot3_common/meshes/wheels/left_tire.stl</uri>
+            <uri>model://turtlebot3_description/meshes/wheels/left_tire.stl</uri>
             <scale>0.001 0.001 0.001</scale>
           </mesh>
         </geometry>
@@ -300,7 +283,7 @@
       </visual>
     </link>
 
-    <link name='caster_back_right_link'>
+    <link name="caster_back_right_link">
       <pose>-0.177 -0.064 -0.004 -1.57 0 0</pose>
       <inertial>
         <mass>0.001</mass>
@@ -313,7 +296,7 @@
           <izz>0.00001</izz>
         </inertia>
       </inertial>
-      <collision name='collision'>
+      <collision name="collision">
         <geometry>
           <sphere>
             <radius>0.005000</radius>
@@ -334,7 +317,7 @@
       </collision>
     </link>
 
-    <link name='caster_back_left_link'>
+    <link name="caster_back_left_link">
       <pose>-0.177 0.064 -0.004 -1.57 0 0</pose>
       <inertial>
         <mass>0.001</mass>
@@ -347,7 +330,7 @@
           <izz>0.00001</izz>
         </inertia>
       </inertial>
-      <collision name='collision'>
+      <collision name="collision">
         <geometry>
           <sphere>
             <radius>0.005000</radius>
@@ -368,7 +351,7 @@
       </collision>
     </link>
 
-    <link name="camera_link"/>
+    <link name="camera_link" />
 
     <link name="camera_rgb_optical_frame">
       <inertial>
@@ -402,24 +385,12 @@
           </clip>
           <noise>
             <type>gaussian</type>
-            <!-- Noise is sampled independently per pixel on each frame.
-                  That pixel's noise value is added to each of its color
-                  channels, which at that point lie in the range [0,1]. -->
+            
             <mean>0.0</mean>
             <stddev>0.007</stddev>
           </noise>
         </camera>
-          <plugin name="camera_driver" filename="libgazebo_ros_camera.so">
-            <ros>
-              <!-- <namespace>test_cam</namespace> -->
-              <!-- <remapping>image_raw:=image_demo</remapping> -->
-              <!-- <remapping>camera_info:=camera_info_demo</remapping> -->
-            </ros>
-            <!-- camera_name>omit so it defaults to sensor name</camera_name-->
-            <!-- frame_name>omit so it defaults to link name</frameName-->
-            <!-- <hack_baseline>0.07</hack_baseline> -->
-          </plugin>
-      </sensor>
+          </sensor>
     </link>    
 
     <joint name="base_joint" type="fixed">
@@ -446,12 +417,12 @@
       </axis>
     </joint>
 
-    <joint name='caster_back_right_joint' type='ball'>
+    <joint name="caster_back_right_joint" type="ball">
       <parent>base_link</parent>
       <child>caster_back_right_link</child>
     </joint>
 
-    <joint name='caster_back_left_joint' type='ball'>
+    <joint name="caster_back_left_joint" type="ball">
       <parent>base_link</parent>
       <child>caster_back_left_link</child>
     </joint>
@@ -492,48 +463,5 @@
       </axis>
     </joint>
 
-    <plugin name="turtlebot3_diff_drive" filename="libgazebo_ros_diff_drive.so">
-
-      <ros>
-        <!-- <namespace>/tb3</namespace> -->
-      </ros>
-
-      <update_rate>30</update_rate>
-
-      <!-- wheels -->
-      <left_joint>wheel_left_joint</left_joint>
-      <right_joint>wheel_right_joint</right_joint>
-
-      <!-- kinematics -->
-      <wheel_separation>0.287</wheel_separation>
-      <wheel_diameter>0.066</wheel_diameter>
-
-      <!-- limits -->
-      <max_wheel_torque>20</max_wheel_torque>
-      <max_wheel_acceleration>1.0</max_wheel_acceleration>
-
-      <command_topic>cmd_vel</command_topic>
-
-      <!-- output -->
-      <publish_odom>true</publish_odom>
-      <publish_odom_tf>true</publish_odom_tf>
-      <publish_wheel_tf>false</publish_wheel_tf>
-
-      <odometry_topic>odom</odometry_topic>
-      <odometry_frame>odom</odometry_frame>
-      <robot_base_frame>base_footprint</robot_base_frame>
-
-    </plugin>
-
-    <plugin name="turtlebot3_joint_state" filename="libgazebo_ros_joint_state_publisher.so">
-      <ros>
-        <!-- <namespace>/tb3</namespace> -->
-        <remapping>~/out:=joint_states</remapping>
-      </ros>
-      <update_rate>30</update_rate>
-      <joint_name>wheel_left_joint</joint_name>
-      <joint_name>wheel_right_joint</joint_name>
-    </plugin>    
-
-  </model>
+    <plugin filename="libignition-gazebo6-diff-drive-system.so" name="ignition::gazebo::systems::DiffDrive"><left_joint>wheel_left_joint</left_joint><right_joint>wheel_right_joint</right_joint><wheel_separation>0.287</wheel_separation><wheel_radius>0.033</wheel_radius><topic>/cmd_vel</topic><odom_topic>/odom</odom_topic><frame_id>odom</frame_id><child_frame_id>base_footprint</child_frame_id></plugin></model>
 </sdf>
