@@ -65,6 +65,8 @@ class ReturnControllerNode(Node):
     def on_safety(self, msg):
         self.safety_return = msg.data
         self.safety_time = time.monotonic()
+        if not msg.data:
+            self.arrived = False
 
     def on_command(self, msg):
         self.command = msg
